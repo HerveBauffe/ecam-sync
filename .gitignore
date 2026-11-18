@@ -1,0 +1,8 @@
+__pycache__/
+*.egg-info/
+.venv/
+venv/
+build/
+*.env
+google-service-account*.json
+CLAUDE.md

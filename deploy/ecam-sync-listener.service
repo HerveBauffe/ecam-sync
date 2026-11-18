@@ -1,0 +1,34 @@
+[Unit]
+Description=ecam-sync : écoute des commandes MQTT de Home Assistant
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ecam-sync
+Group=ecam-sync
+ExecStart=/opt/ecam-sync/venv/bin/ecam-sync listen
+StateDirectory=ecam-sync
+Restart=on-failure
+RestartSec=10
+
+# Durcissement : le service n'a besoin que du réseau et de son dossier d'état
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+# AF_UNIX : résolution DNS via systemd-resolved (nss-resolve) et journal
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictNamespaces=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+SystemCallArchitectures=native
+CapabilityBoundingSet=
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

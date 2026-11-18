@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ecam-sync"
+version = "1.0.0"
+description = "Synchronise un calendrier ICS (ECAM) vers un calendrier Google dédié, déclenché via MQTT/Home Assistant"
+requires-python = ">=3.11"
+dependencies = [
+    "icalendar>=6.0",
+    "recurring-ical-events>=3.0",
+    "google-api-python-client>=2.100",
+    "google-auth>=2.20",
+    "paho-mqtt>=2.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+ecam-sync = "ecam_sync.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

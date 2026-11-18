@@ -1,0 +1,28 @@
+[Unit]
+Description=ecam-sync : synchronisation hebdomadaire (lancée par le timer)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=ecam-sync
+Group=ecam-sync
+ExecStart=/opt/ecam-sync/venv/bin/ecam-sync sync --trigger timer
+StateDirectory=ecam-sync
+
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+# AF_UNIX : résolution DNS via systemd-resolved (nss-resolve) et journal
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictNamespaces=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+SystemCallArchitectures=native
+CapabilityBoundingSet=
+UMask=0077

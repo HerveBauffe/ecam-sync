@@ -1,0 +1,12 @@
+[Unit]
+Description=ecam-sync : synchronisation hebdomadaire du calendrier
+
+[Timer]
+# Chaque dimanche à 20h (heure de Bruxelles). Modifier ici pour changer le jour/l'heure.
+OnCalendar=Sun *-*-* 20:00:00 Europe/Brussels
+# Si le serveur était éteint à l'heure prévue, rattrape au prochain démarrage
+Persistent=true
+RandomizedDelaySec=5min
+
+[Install]
+WantedBy=timers.target

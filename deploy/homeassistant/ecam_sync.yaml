@@ -1,0 +1,58 @@
+# Home Assistant — package « ecam_sync »
+#
+# Installation : copier ce fichier dans /config/packages/ecam_sync.yaml puis, dans configuration.yaml :
+#     homeassistant:
+#       packages: !include_dir_named packages
+# Recharger la configuration (Outils de développement > YAML > Redémarrer) pour activer.
+# Prérequis : l'intégration MQTT de Home Assistant est déjà connectée à votre broker.
+
+input_button:
+  ecam_sync:
+    name: Synchroniser le calendrier ECAM
+    icon: mdi:calendar-sync
+
+mqtt:
+  sensor:
+    - name: "Sync calendrier ECAM"          # -> entité sensor.sync_calendrier_ecam
+      unique_id: ecam_sync_status
+      icon: mdi:calendar-sync
+      state_topic: "ecam_sync/status"
+      value_template: "{{ value_json.status }}"        # running | ok | error
+      json_attributes_topic: "ecam_sync/status"        # message, created, updated, deleted, finished_at...
+      availability_topic: "ecam_sync/availability"     # « unavailable » si le démon du SBC est arrêté
+
+automation:
+  - id: ecam_sync_run
+    alias: "Calendrier ECAM : lancer la synchronisation"
+    mode: single
+    triggers:
+      - trigger: state
+        entity_id: input_button.ecam_sync
+    actions:
+      - action: mqtt.publish
+        data:
+          topic: ecam_sync/command
+          payload: sync
+          retain: false        # ne jamais « retenir » la commande, sinon elle rejouerait au redémarrage
+
+  - id: ecam_sync_result
+    alias: "Calendrier ECAM : notifier le résultat"
+    mode: queued
+    triggers:
+      # « from: running » : ne se déclenche qu'après une vraie synchronisation (pas au démarrage de HA)
+      - trigger: state
+        entity_id: sensor.sync_calendrier_ecam
+        from: "running"
+        to: ["ok", "error"]
+    actions:
+      - action: persistent_notification.create
+        data:
+          notification_id: ecam_sync_result
+          title: >-
+            Calendrier ECAM : {{ 'synchronisé' if trigger.to_state.state == 'ok' else 'ÉCHEC de la synchronisation' }}
+          message: "{{ trigger.to_state.attributes.message }}"
+      # Pour aussi recevoir une notification sur le téléphone, décommenter (adapter le nom du service) :
+      # - action: notify.mobile_app_VOTRE_TELEPHONE
+      #   data:
+      #     title: "Calendrier ECAM"
+      #     message: "{{ trigger.to_state.attributes.message }}"
