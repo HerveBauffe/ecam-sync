@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Android adaptive-icon foreground: transparent, logo inside the safe zone. Background colour: #16181D -->
+  <g transform="translate(245.76 353.80) scale(0.39501)">
+  <g fill="#fff">
+    <path d="M519.7 575.0A261 261 0 1 1 361.5 299.0L331.1 354.7A198 198 0 1 0 456.0 575.0Z"/>
+    <path d="M995.4 295.4A261 261 0 1 1 828.0 575.0L891.7 575.0A198 198 0 1 0 1023.0 352.4Z"/>
+  </g>
+  <g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M392.0 33.0H569.0" stroke-width="65"/>
+    <path d="M974.0 33.0H1062.0A74 74 0 0 1 1062.0 181.0H1047.0" stroke-width="64"/>
+  </g>
+  <path d="M471.5 163.0L896.2 163.0L1079.7 542.0L896.6 164.0L697.6 543.5L264.1 543.5Z" fill="#818CF8" stroke="#818CF8" stroke-width="63" stroke-linejoin="round"/>
+  </g>
+</svg>

@@ -1,0 +1,6 @@
+{
+  "git": {
+    "sha1": "7c7054702d11f00fe99143c4ea14a0fb6ba71340"
+  },
+  "path_in_vcs": "crates/tauri-plugin-blec"
+}

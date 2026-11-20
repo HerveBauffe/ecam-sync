@@ -1,0 +1,11 @@
+BikeTo (repository: velo-app)
+Licensed under the MIT License (see LICENSE).
+
+This project includes code adapted from:
+
+- zwo-trainer — https://github.com/steffenr/zwo-trainer
+  Copyright (c) 2026 SteffenR — MIT License
+  Used in: crates/velo-ble (FTMS and Zwift controller protocol handling)
+
+- tauri-plugin-blec 0.20.0 — https://github.com/MnlPhlp/tauri-plugin-blec
+  MIT OR Apache-2.0 — vendored with a patch in vendor/tauri-plugin-blec (see vendor/README.md)

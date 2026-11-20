@@ -1,0 +1,46 @@
+/* Soft palette, dark first. Toggle with data-theme on <html>. */
+:root {
+  --bg: #16181d;
+  --surface: #1f2229;
+  --surface-2: #282c35;
+  --text: #e4e6eb;
+  --muted: #9aa0ab;
+  --accent: #818cf8;
+  --ok: #8fc79a;
+  --warn: #e6c27a;
+  --bad: #e58f8f;
+  --radius: 14px;
+  color-scheme: dark;
+}
+:root[data-theme="light"] {
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --surface-2: #eceef2;
+  --text: #22252b;
+  --muted: #646a75;
+  --accent: #4f46e5;
+  --ok: #3f8f52;
+  --warn: #a8791f;
+  --bad: #c0504d;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+button {
+  font: inherit;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+}
+button:hover { border-color: var(--accent); }
+button:disabled { opacity: 0.5; cursor: default; border-color: transparent; }
+button.primary { background: var(--accent); color: var(--bg); }

@@ -1,0 +1,25 @@
+[package]
+name = "velo-app"
+description = "ERG-first indoor cycling training hub"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[lib]
+name = "velo_app_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.7.6", features = [] }
+
+[dependencies]
+velo-ble = { path = "../crates/velo-ble" }
+tauri = { version = "2.12.7", features = [] }
+tauri-plugin-log = "2"
+tauri-plugin-blec = "0.20"
+serde.workspace = true
+serde_json.workspace = true
+uuid.workspace = true
+tokio = { version = "1", features = ["sync", "time"] }
+log = "0.4"
